@@ -1,0 +1,29 @@
+type Query {
+  user(id: Int!): User
+}
+
+type Mutation {
+  login(input: LoginRequest): LoginResponse
+}
+
+input LoginRequest {
+  customId: String
+}
+
+type LoginResponse {
+  isNew: Boolean!
+  user: User!
+  token: String!
+  expiresAt: Int!
+}
+  
+type User {
+  id: Int!
+  name: String!
+  gameData: GameData
+}
+
+type GameData {
+  hello: String
+}
+    
