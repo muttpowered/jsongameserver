@@ -1,6 +1,10 @@
 /* tslint:disable */
 export class LoginRequest {
-    customId?: string;
+    customId: string;
+}
+
+export class UserDataRequest {
+    newGameData: JSON;
 }
 
 export class LoginResponse {
@@ -12,6 +16,8 @@ export class LoginResponse {
 
 export abstract class IMutation {
     abstract login(input?: LoginRequest): LoginResponse | Promise<LoginResponse>;
+
+    abstract updateUserData(input?: UserDataRequest): User | Promise<User>;
 }
 
 export abstract class IQuery {

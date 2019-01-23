@@ -6,10 +6,15 @@ type Query {
 
 type Mutation {
   login(input: LoginRequest): LoginResponse
+  updateUserData(input: UserDataRequest): User
+}
+
+input UserDataRequest {
+  newGameData: JSON!
 }
 
 input LoginRequest {
-  customId: String
+  customId: String!
 }
 
 type LoginResponse {

@@ -23,7 +23,6 @@ export class AuthService {
     if (!user) {
       // no user, make one!
       lr.isNew = true;
-      Logger.log(`New User login ${customId}`);
       user = await this.usersService.createUserByCustomId(customId);
     }
     const jwtSigningObject: any = { customId: user.name };

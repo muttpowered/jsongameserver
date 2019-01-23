@@ -11,7 +11,6 @@ export class AuthResolver {
 
     @Mutation()
     async login(@Args('input') lr: LoginRequest): Promise<LoginResponse> {
-        Logger.log(`Logging in with ${JSON.stringify(lr.customId)}`);
         return await this.authService.loginWithCustomId(lr.customId);
     }
 

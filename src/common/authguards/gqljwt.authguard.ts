@@ -13,8 +13,6 @@ export class GQLJwtAuthGuard extends AuthGuard('jwt') {
         return super.canActivate(new ExecutionContextHost([req]));
     }
     handleRequest(err, user, info) {
-        Logger.log(err);
-        Logger.log(user);
         if (err || !user) {
             throw err || new UnauthorizedException();
         }

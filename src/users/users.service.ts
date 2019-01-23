@@ -32,10 +32,7 @@ export class UsersService {
   }
 
   async getGameData(u: User): Promise<JSON> {
-    Logger.log(`Doing it with ${JSON.stringify(u, null, 2)}`);
-    Logger.log(`current gdata is ${JSON.stringify(u.gameData)}`);
     return await u.gameData;
-    // return await JSON.parse(u.gameData) as JSON;
   }
 
   async hasUserById(id: number): Promise<boolean> {
