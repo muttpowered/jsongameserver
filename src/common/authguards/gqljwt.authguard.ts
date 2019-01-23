@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ExecutionContext, Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context.host';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
@@ -13,6 +13,8 @@ export class GQLJwtAuthGuard extends AuthGuard('jwt') {
         return super.canActivate(new ExecutionContextHost([req]));
     }
     handleRequest(err, user, info) {
+        Logger.log(err);
+        Logger.log(user);
         if (err || !user) {
             throw err || new UnauthorizedException();
         }

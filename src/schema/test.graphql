@@ -1,3 +1,5 @@
+scalar JSON
+
 type Query {
   user(id: Int!): User
 }
@@ -12,7 +14,7 @@ input LoginRequest {
 
 type LoginResponse {
   isNew: Boolean!
-  user: User!
+  userId: Int!
   token: String!
   expiresAt: Int!
 }
@@ -20,10 +22,7 @@ type LoginResponse {
 type User {
   id: Int!
   name: String!
-  gameData: GameData
+  gameData: JSON
 }
 
-type GameData {
-  hello: String
-}
     

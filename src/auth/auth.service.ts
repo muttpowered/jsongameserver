@@ -18,7 +18,7 @@ export class AuthService {
       expiresAt: 0,
       isNew: false,
       token: ``,
-      user: null,
+      userId: 0,
     };
     if (!user) {
       // no user, make one!
@@ -30,11 +30,7 @@ export class AuthService {
     const token = this.jwtService.sign(jwtSigningObject);
     lr.token = token;
     lr.expiresAt = Math.floor((Date.now() + 7200000) / 1000);
-    lr.user = {
-      id: user.id,
-      name: user.name,
-      gameData: ``,
-    };
+    lr.userId = user.id;
 
     return lr;
   }

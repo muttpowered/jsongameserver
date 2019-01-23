@@ -5,7 +5,6 @@ import { User } from './user.entity';
 import { UserResolver } from './user.resolver';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { GameDataResolver } from './gameData.resolver';
 
 // Setup app from here, add other modules as needed
 @Global()
@@ -20,7 +19,6 @@ import { GameDataResolver } from './gameData.resolver';
     providers: [
         UsersService,
         UserResolver,
-        GameDataResolver,
     ],
     exports: [
         UsersService,

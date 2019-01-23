@@ -4,7 +4,7 @@ services:
         image: mysql   
         container_name: json-mysql     
         ports: 
-            - "3306:3306"
+            - 3306:3306
         command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_DATABASE: jsongameserver
@@ -28,7 +28,7 @@ services:
         image: redis
         container_name: json-redis
         restart: always
-        command: ["redis-server", "--requirepass dave", "--appendonly", "yes"]
+        command: ["redis-server", "--requirepass mutts", "--appendonly", "yes"]
         volumes:
             - jsonredisdata:/data
         ports:

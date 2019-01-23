@@ -1,5 +1,5 @@
 {
-  "name": "simple-config-server",
+  "name": "simple-json-game-server",
   "version": "0.0.1",
   "description": "GameServerTest",
   "author": "muttpowered",
@@ -32,6 +32,7 @@
     "dotenv": "^6.2.0",
     "graphql": "^14.1.0",
     "graphql-tools": "^4.0.3",
+    "graphql-type-json": "^0.2.1",
     "mysql": "^2.16.0",
     "nestjs-redis": "^1.1.1",
     "passport": "^0.4.0",

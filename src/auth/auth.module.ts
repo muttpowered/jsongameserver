@@ -5,15 +5,21 @@ import { UsersModule } from '../users/users.module';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
+import { ConfigModule } from 'src/config/config.module';
+import { ConfigService } from 'src/config/config.service';
 
 @Module({
     imports: [
         PassportModule.register({ defaultStrategy: 'jwt' }),
-        JwtModule.register({
-            secretOrPrivateKey: 'secretKeyYouCantGuessMe',
-            signOptions: {
-                expiresIn: 7200,
-            },
+        JwtModule.registerAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => ({
+                secretOrPrivateKey: configService.get('JWT_KEY'),
+                signOptions: {
+                    expiresIn: parseInt(configService.get('JWT_EXPIRY')),
+                },
+            }),
         }),
         UsersModule,
     ],

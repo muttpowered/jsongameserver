@@ -3,13 +3,9 @@ export class LoginRequest {
     customId?: string;
 }
 
-export class GameData {
-    hello?: string;
-}
-
 export class LoginResponse {
     isNew: boolean;
-    user: User;
+    userId: number;
     token: string;
     expiresAt: number;
 }
@@ -27,5 +23,7 @@ export abstract class IQuery {
 export class User {
     id: number;
     name: string;
-    gameData?: GameData;
+    gameData?: JSON;
 }
+
+export type JSON = any;

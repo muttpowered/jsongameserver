@@ -2,7 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { GameData, LoginRequest } from 'src/graphql';
+import { LoginRequest, JSON } from 'src/graphql';
+import { strict } from 'assert';
 
 @Injectable()
 export class UsersService {
@@ -10,7 +11,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   login(): void {
     // gsdgd
@@ -25,13 +26,16 @@ export class UsersService {
   async createUserByCustomId(customId: string): Promise<User> {
     const user = new User();
     user.name = customId.toLowerCase();
+    user.gameData = JSON.stringify({});
     await this.userRepository.save(user);
     return user;
   }
 
-  async getGameData(u: User): Promise<GameData> {
+  async getGameData(u: User): Promise<JSON> {
     Logger.log(`Doing it with ${JSON.stringify(u, null, 2)}`);
-    return await JSON.parse(u.gameData) as GameData;
+    Logger.log(`current gdata is ${JSON.stringify(u.gameData)}`);
+    return await u.gameData;
+    // return await JSON.parse(u.gameData) as JSON;
   }
 
   async hasUserById(id: number): Promise<boolean> {
