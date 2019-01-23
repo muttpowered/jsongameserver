@@ -5,12 +5,13 @@ import {
   Query,
   ResolveProperty,
   Resolver,
+  Mutation,
 } from '@nestjs/graphql';
 import { GQLJwtAuthGuard } from 'src/common/authguards/gqljwt.authguard';
 import { UserDec } from 'src/common/decorators/user.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { JSON } from 'src/graphql';
+import { JSON, UserDataRequest } from 'src/graphql';
 
 @Resolver('User')
 export class UserResolver {
@@ -22,6 +23,14 @@ export class UserResolver {
     return await this.usersService.findOneById(id);
   }
 
+  @Mutation()
+  @UseGuards(GQLJwtAuthGuard)
+  async updateUserData(@UserDec() currentUser: User, @Args('input') udr: UserDataRequest): Promise<User> {
+    // take the data, and save it
+    Logger.log(`SAving with ${JSON.stringify(currentUser)}`);
+    Logger.log(`Saving - ${JSON.stringify(udr.newGameData)}`);
+    return await this.usersService.setGameData(currentUser, udr.newGameData);
+  }
 
   @ResolveProperty('gameData')
   @UseGuards(GQLJwtAuthGuard)

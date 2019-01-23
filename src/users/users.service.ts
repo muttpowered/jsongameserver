@@ -23,6 +23,11 @@ export class UsersService {
     await this.userRepository.save(t);
   }
 
+  async setGameData(u: User, newData:any): Promise<User> {
+    u.gameData = newData;
+    return await this.userRepository.save(u);
+  }
+
   async createUserByCustomId(customId: string): Promise<User> {
     const user = new User();
     user.name = customId.toLowerCase();
