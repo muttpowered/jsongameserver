@@ -29,6 +29,8 @@ export abstract class IMutation {
 export abstract class IQuery {
     abstract user(id: number): User | Promise<User>;
 
+    abstract leaderboard(type?: string): JSON | Promise<JSON>;
+
     abstract temp__(): boolean | Promise<boolean>;
 }
 

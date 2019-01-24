@@ -16,7 +16,7 @@ import { ConfigService } from 'src/config/config.service';
                 keyPrefix: configService.get('REDIS_PREFIX'),
             }),
         }),
+        
     ],
-    providers: [],
 })
 export class DBCacheModule { }

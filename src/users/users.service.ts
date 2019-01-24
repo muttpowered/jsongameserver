@@ -1,9 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JSON } from 'src/graphql';
+import { LeaderboardService } from 'src/leaderboard/leaderboard.service';
 import { Repository } from 'typeorm';
+
 import { User } from './user.entity';
-import { LoginRequest, JSON } from 'src/graphql';
-import { strict } from 'assert';
 
 @Injectable()
 export class UsersService {
@@ -11,17 +12,8 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly leaderboardService: LeaderboardService,
   ) { }
-
-  login(): void {
-    // gsdgd
-  }
-
-  async createFakeUser(): Promise<any> {
-    const t = new User();
-    t.name = `Dave`;
-    await this.userRepository.save(t);
-  }
 
   async setGameData(u: User, newData:any): Promise<User> {
     u.gameData = newData;
@@ -34,6 +26,8 @@ export class UsersService {
     if (score > 100){
       u.coins += 10;
       u.level += 1;
+      // Update our leaderboard service too!
+      await this.leaderboardService.updateLeaderboardPosition(u);
       return await this.userRepository.save(u);
     }
     return await u;

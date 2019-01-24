@@ -2,6 +2,7 @@ scalar JSON
 
 type Query {
   user(id: Int!): User
+  leaderboard(type: String): JSON!
 }
 
 type Mutation {

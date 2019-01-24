@@ -1,6 +1,8 @@
 import { Global, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LeaderboardModule } from 'src/leaderboard/leaderboard.module';
+
 import { User } from './user.entity';
 import { UserResolver } from './user.resolver';
 import { UsersService } from './users.service';
@@ -11,6 +13,7 @@ import { UsersService } from './users.service';
     imports: [
         TypeOrmModule.forFeature([User]),
         PassportModule,
+        LeaderboardModule,
     ],
     providers: [
         UsersService,
