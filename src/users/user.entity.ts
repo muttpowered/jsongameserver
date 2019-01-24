@@ -9,6 +9,17 @@ export class User {
   @Column({ length: 500 })
   name: string;
 
+  @Column({
+    default: 0
+  })
+  coins: number;
+
+  @Column({
+    default: 1
+  })
+  level: number;
+
+
   @Column('text')
   gameData: string;
 

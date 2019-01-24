@@ -1,4 +1,8 @@
 /* tslint:disable */
+export class LevelSaveRequest {
+    score: number;
+}
+
 export class LoginRequest {
     customId: string;
 }
@@ -17,7 +21,9 @@ export class LoginResponse {
 export abstract class IMutation {
     abstract login(input?: LoginRequest): LoginResponse | Promise<LoginResponse>;
 
-    abstract updateUserData(input?: UserDataRequest): User | Promise<User>;
+    abstract updateUserGameData(input?: UserDataRequest): User | Promise<User>;
+
+    abstract saveLevelResult(input?: LevelSaveRequest): User | Promise<User>;
 }
 
 export abstract class IQuery {
@@ -29,6 +35,8 @@ export abstract class IQuery {
 export class User {
     id: number;
     name: string;
+    coins: number;
+    level: number;
     gameData?: JSON;
 }
 

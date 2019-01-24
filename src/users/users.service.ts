@@ -28,6 +28,17 @@ export class UsersService {
     return await this.userRepository.save(u);
   }
 
+  async saveLevelResult(u: User, score: number): Promise<User> {
+    // Increment the user's level and coins
+    // Perhaps do some validation on the score 
+    if (score > 100){
+      u.coins += 10;
+      u.level += 1;
+      return await this.userRepository.save(u);
+    }
+    return await u;
+  }
+
   async createUserByCustomId(customId: string): Promise<User> {
     const user = new User();
     user.name = customId.toLowerCase();

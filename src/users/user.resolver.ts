@@ -11,7 +11,7 @@ import { GQLJwtAuthGuard } from 'src/common/authguards/gqljwt.authguard';
 import { UserDec } from 'src/common/decorators/user.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { JSON, UserDataRequest } from 'src/graphql';
+import { JSON, UserDataRequest, LevelSaveRequest } from 'src/graphql';
 
 @Resolver('User')
 export class UserResolver {
@@ -25,11 +25,16 @@ export class UserResolver {
 
   @Mutation()
   @UseGuards(GQLJwtAuthGuard)
-  async updateUserData(@UserDec() currentUser: User, @Args('input') udr: UserDataRequest): Promise<User> {
-    // take the data, and save it
-    Logger.log(`SAving with ${JSON.stringify(currentUser)}`);
-    Logger.log(`Saving - ${JSON.stringify(udr.newGameData)}`);
+  async updateUserGameData(@UserDec() currentUser: User, @Args('input') udr: UserDataRequest): Promise<User> {
+    // Save free form data here.
     return await this.usersService.setGameData(currentUser, udr.newGameData);
+  }
+
+  @Mutation()
+  @UseGuards(GQLJwtAuthGuard)
+  async saveLevelResult(@UserDec() currentUser: User, @Args('input') input: LevelSaveRequest): Promise<User> {
+    // Send it to the user service 
+    return await this.usersService.saveLevelResult(currentUser, input.score);
   }
 
   @ResolveProperty('gameData')

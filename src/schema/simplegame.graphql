@@ -6,7 +6,12 @@ type Query {
 
 type Mutation {
   login(input: LoginRequest): LoginResponse
-  updateUserData(input: UserDataRequest): User
+  updateUserGameData(input: UserDataRequest): User
+  saveLevelResult(input: LevelSaveRequest): User
+}
+
+input LevelSaveRequest {
+  score: Int!
 }
 
 input UserDataRequest {
@@ -27,6 +32,8 @@ type LoginResponse {
 type User {
   id: Int!
   name: String!
+  coins: Int!
+  level: Int!
   gameData: JSON
 }
 
