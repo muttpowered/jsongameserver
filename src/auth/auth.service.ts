@@ -1,7 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginResponse } from 'src/graphql';
+
 import { UsersService } from '../users/users.service';
+
 // import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
@@ -32,10 +34,6 @@ export class AuthService {
     lr.userId = user.id;
 
     return lr;
-  }
-
-  async createFakeUser(): Promise<any> {
-    return await this.usersService.createFakeUser();
   }
 
   // Called by authguards

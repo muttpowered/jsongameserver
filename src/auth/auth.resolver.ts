@@ -1,6 +1,6 @@
-import { Logger } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { LoginRequest, LoginResponse } from 'src/graphql';
+
 import { AuthService } from './auth.service';
 
 @Resolver('Auth')

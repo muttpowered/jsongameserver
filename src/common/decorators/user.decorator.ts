@@ -1,5 +1,4 @@
-import { createParamDecorator, Logger } from '@nestjs/common';
-import { couldStartTrivia } from 'typescript';
+import { createParamDecorator } from '@nestjs/common';
 
 export const UserDec = createParamDecorator(
   (data, [root, args, ctx, info]) => ctx.req.user,

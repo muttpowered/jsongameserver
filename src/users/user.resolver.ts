@@ -1,17 +1,11 @@
-import { HttpException, UseGuards, Logger } from '@nestjs/common';
-import {
-  Args,
-  Parent,
-  Query,
-  ResolveProperty,
-  Resolver,
-  Mutation,
-} from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Parent, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { GQLJwtAuthGuard } from 'src/common/authguards/gqljwt.authguard';
 import { UserDec } from 'src/common/decorators/user.decorator';
+import { JSON, LevelSaveRequest, UserDataRequest } from 'src/graphql';
+
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { JSON, UserDataRequest, LevelSaveRequest } from 'src/graphql';
 
 @Resolver('User')
 export class UserResolver {
